@@ -25,8 +25,23 @@ Partial Class frmMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.gbMatrixSettings = New System.Windows.Forms.GroupBox()
+        Me.btnIDMatrix = New System.Windows.Forms.Button()
+        Me.btnZeroMatrix = New System.Windows.Forms.Button()
+        Me.gbMemory = New System.Windows.Forms.GroupBox()
+        Me.lblMatrixBuildStatus = New System.Windows.Forms.Label()
+        Me.pbMatrixBuildProgress = New System.Windows.Forms.ProgressBar()
+        Me.lblMemoryAllocated = New System.Windows.Forms.Label()
+        Me.btnForceGC = New System.Windows.Forms.Button()
         Me.btnUpdateView = New System.Windows.Forms.Button()
         Me.numCols = New System.Windows.Forms.NumericUpDown()
+        Me.contextmenuNumInputs = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SetMaxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetMinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetToConstToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.numRows = New System.Windows.Forms.NumericUpDown()
         Me.lblCols = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
@@ -41,29 +56,22 @@ Partial Class frmMain
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.gbMatrixCalculations = New System.Windows.Forms.GroupBox()
-        Me.btnExit = New System.Windows.Forms.Button()
-        Me.lblMemoryAllocated = New System.Windows.Forms.Label()
-        Me.btnForceGC = New System.Windows.Forms.Button()
-        Me.gbMemory = New System.Windows.Forms.GroupBox()
-        Me.lblMatrixBuildStatus = New System.Windows.Forms.Label()
-        Me.pbMatrixBuildProgress = New System.Windows.Forms.ProgressBar()
-        Me.btnZeroMatrix = New System.Windows.Forms.Button()
-        Me.btnIDMatrix = New System.Windows.Forms.Button()
-        Me.lblOutputFileStatus = New System.Windows.Forms.Label()
         Me.gbOutputFileSettings = New System.Windows.Forms.GroupBox()
-        Me.txtOutputFileDirectory = New System.Windows.Forms.TextBox()
-        Me.txtOutputFileName = New System.Windows.Forms.TextBox()
-        Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblOutputFilePath = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.lblOutputFileName = New System.Windows.Forms.Label()
-        Me.btnCreateFile = New System.Windows.Forms.Button()
-        Me.btnSaveToFile = New System.Windows.Forms.Button()
+        Me.lblOutputFilePath = New System.Windows.Forms.Label()
+        Me.txtOutputFileName = New System.Windows.Forms.TextBox()
+        Me.txtOutputFileDirectory = New System.Windows.Forms.TextBox()
+        Me.lblOutputFileStatus = New System.Windows.Forms.Label()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.gbMatrixSettings.SuspendLayout()
+        Me.gbMemory.SuspendLayout()
         CType(Me.numCols, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.contextmenuNumInputs.SuspendLayout()
         CType(Me.numRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbMatrixViewer.SuspendLayout()
         Me.gbMatrixCalculations.SuspendLayout()
-        Me.gbMemory.SuspendLayout()
         Me.gbOutputFileSettings.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -84,6 +92,78 @@ Partial Class frmMain
         Me.gbMatrixSettings.TabStop = False
         Me.gbMatrixSettings.Text = "Matrix Settings"
         '
+        'btnIDMatrix
+        '
+        Me.btnIDMatrix.ForeColor = System.Drawing.Color.Red
+        Me.btnIDMatrix.Location = New System.Drawing.Point(248, 41)
+        Me.btnIDMatrix.Name = "btnIDMatrix"
+        Me.btnIDMatrix.Size = New System.Drawing.Size(107, 22)
+        Me.btnIDMatrix.TabIndex = 10
+        Me.btnIDMatrix.Text = "ID Matrix"
+        Me.btnIDMatrix.UseVisualStyleBackColor = True
+        '
+        'btnZeroMatrix
+        '
+        Me.btnZeroMatrix.ForeColor = System.Drawing.Color.Red
+        Me.btnZeroMatrix.Location = New System.Drawing.Point(248, 17)
+        Me.btnZeroMatrix.Name = "btnZeroMatrix"
+        Me.btnZeroMatrix.Size = New System.Drawing.Size(107, 22)
+        Me.btnZeroMatrix.TabIndex = 9
+        Me.btnZeroMatrix.Text = "Zero Matrix"
+        Me.btnZeroMatrix.UseVisualStyleBackColor = True
+        '
+        'gbMemory
+        '
+        Me.gbMemory.Controls.Add(Me.lblMatrixBuildStatus)
+        Me.gbMemory.Controls.Add(Me.pbMatrixBuildProgress)
+        Me.gbMemory.Controls.Add(Me.lblMemoryAllocated)
+        Me.gbMemory.Controls.Add(Me.btnForceGC)
+        Me.gbMemory.Location = New System.Drawing.Point(6, 71)
+        Me.gbMemory.Name = "gbMemory"
+        Me.gbMemory.Size = New System.Drawing.Size(355, 199)
+        Me.gbMemory.TabIndex = 8
+        Me.gbMemory.TabStop = False
+        Me.gbMemory.Text = "Memory"
+        '
+        'lblMatrixBuildStatus
+        '
+        Me.lblMatrixBuildStatus.AutoSize = True
+        Me.lblMatrixBuildStatus.Location = New System.Drawing.Point(6, 155)
+        Me.lblMatrixBuildStatus.Name = "lblMatrixBuildStatus"
+        Me.lblMatrixBuildStatus.Size = New System.Drawing.Size(74, 13)
+        Me.lblMatrixBuildStatus.TabIndex = 9
+        Me.lblMatrixBuildStatus.Text = "Status: Ready"
+        '
+        'pbMatrixBuildProgress
+        '
+        Me.pbMatrixBuildProgress.Location = New System.Drawing.Point(3, 171)
+        Me.pbMatrixBuildProgress.Name = "pbMatrixBuildProgress"
+        Me.pbMatrixBuildProgress.Size = New System.Drawing.Size(346, 23)
+        Me.pbMatrixBuildProgress.TabIndex = 8
+        '
+        'lblMemoryAllocated
+        '
+        Me.lblMemoryAllocated.AutoSize = True
+        Me.lblMemoryAllocated.Location = New System.Drawing.Point(149, 27)
+        Me.lblMemoryAllocated.Name = "lblMemoryAllocated"
+        Me.lblMemoryAllocated.Size = New System.Drawing.Size(81, 13)
+        Me.lblMemoryAllocated.TabIndex = 6
+        Me.lblMemoryAllocated.Text = "Memory In Use:"
+        Me.tooltipMain.SetToolTip(Me.lblMemoryAllocated, "Approximate amount of memory currently allocated" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "on the heap.")
+        '
+        'btnForceGC
+        '
+        Me.btnForceGC.AutoSize = True
+        Me.btnForceGC.Location = New System.Drawing.Point(6, 19)
+        Me.btnForceGC.Name = "btnForceGC"
+        Me.btnForceGC.Size = New System.Drawing.Size(137, 28)
+        Me.btnForceGC.TabIndex = 7
+        Me.btnForceGC.Text = "Force Garbage Collection"
+        Me.tooltipMain.SetToolTip(Me.btnForceGC, "The .NET framework manages memory automatically" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "using its reference-counting gar" &
+        "bage collector, but you" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "can use this control to force trigger a garbage collect" &
+        "ion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "cycle.")
+        Me.btnForceGC.UseVisualStyleBackColor = True
+        '
         'btnUpdateView
         '
         Me.btnUpdateView.Location = New System.Drawing.Point(135, 17)
@@ -95,6 +175,7 @@ Partial Class frmMain
         '
         'numCols
         '
+        Me.numCols.ContextMenuStrip = Me.contextmenuNumInputs
         Me.numCols.Location = New System.Drawing.Point(59, 43)
         Me.numCols.Maximum = New Decimal(New Integer() {45000, 0, 0, 0})
         Me.numCols.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
@@ -104,8 +185,60 @@ Partial Class frmMain
         Me.tooltipMain.SetToolTip(Me.numCols, resources.GetString("numCols.ToolTip"))
         Me.numCols.Value = New Decimal(New Integer() {3, 0, 0, 0})
         '
+        'contextmenuNumInputs
+        '
+        Me.contextmenuNumInputs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetMaxToolStripMenuItem, Me.SetMinToolStripMenuItem, Me.SetToConstToolStripMenuItem})
+        Me.contextmenuNumInputs.Name = "contextmenuNumInputs"
+        Me.contextmenuNumInputs.Size = New System.Drawing.Size(141, 70)
+        '
+        'SetMaxToolStripMenuItem
+        '
+        Me.SetMaxToolStripMenuItem.Name = "SetMaxToolStripMenuItem"
+        Me.SetMaxToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SetMaxToolStripMenuItem.Text = "Set To Max"
+        '
+        'SetMinToolStripMenuItem
+        '
+        Me.SetMinToolStripMenuItem.Name = "SetMinToolStripMenuItem"
+        Me.SetMinToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SetMinToolStripMenuItem.Text = "Set To Min"
+        '
+        'SetToConstToolStripMenuItem
+        '
+        Me.SetToConstToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+        Me.SetToConstToolStripMenuItem.Enabled = False
+        Me.SetToConstToolStripMenuItem.ForeColor = System.Drawing.Color.Red
+        Me.SetToConstToolStripMenuItem.Name = "SetToConstToolStripMenuItem"
+        Me.SetToConstToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SetToConstToolStripMenuItem.Text = "Set To Const"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripMenuItem2.Text = "3"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripMenuItem3.Text = "4"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripMenuItem4.Text = "5"
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripMenuItem5.Text = "10"
+        '
         'numRows
         '
+        Me.numRows.ContextMenuStrip = Me.contextmenuNumInputs
         Me.numRows.Location = New System.Drawing.Point(59, 17)
         Me.numRows.Maximum = New Decimal(New Integer() {45000, 0, 0, 0})
         Me.numRows.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
@@ -243,82 +376,68 @@ Partial Class frmMain
         Me.gbMatrixCalculations.TabStop = False
         Me.gbMatrixCalculations.Text = "Operations"
         '
-        'btnExit
+        'gbOutputFileSettings
         '
-        Me.btnExit.Location = New System.Drawing.Point(12, 638)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(367, 23)
-        Me.btnExit.TabIndex = 4
-        Me.btnExit.Text = "Exit"
-        Me.btnExit.UseVisualStyleBackColor = True
+        Me.gbOutputFileSettings.Controls.Add(Me.btnSave)
+        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFileName)
+        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFilePath)
+        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileName)
+        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileDirectory)
+        Me.gbOutputFileSettings.Location = New System.Drawing.Point(6, 32)
+        Me.gbOutputFileSettings.Name = "gbOutputFileSettings"
+        Me.gbOutputFileSettings.Size = New System.Drawing.Size(355, 206)
+        Me.gbOutputFileSettings.TabIndex = 1
+        Me.gbOutputFileSettings.TabStop = False
+        Me.gbOutputFileSettings.Text = "Output File Settings"
         '
-        'lblMemoryAllocated
+        'btnSave
         '
-        Me.lblMemoryAllocated.AutoSize = True
-        Me.lblMemoryAllocated.Location = New System.Drawing.Point(149, 27)
-        Me.lblMemoryAllocated.Name = "lblMemoryAllocated"
-        Me.lblMemoryAllocated.Size = New System.Drawing.Size(81, 13)
-        Me.lblMemoryAllocated.TabIndex = 6
-        Me.lblMemoryAllocated.Text = "Memory In Use:"
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnSave.Location = New System.Drawing.Point(11, 71)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(338, 23)
+        Me.btnSave.TabIndex = 6
+        Me.btnSave.Text = "Save File"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'btnForceGC
+        'lblOutputFileName
         '
-        Me.btnForceGC.AutoSize = True
-        Me.btnForceGC.Location = New System.Drawing.Point(6, 19)
-        Me.btnForceGC.Name = "btnForceGC"
-        Me.btnForceGC.Size = New System.Drawing.Size(137, 28)
-        Me.btnForceGC.TabIndex = 7
-        Me.btnForceGC.Text = "Force Garbage Collection"
-        Me.btnForceGC.UseVisualStyleBackColor = True
+        Me.lblOutputFileName.AutoSize = True
+        Me.lblOutputFileName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lblOutputFileName.Location = New System.Drawing.Point(8, 48)
+        Me.lblOutputFileName.Name = "lblOutputFileName"
+        Me.lblOutputFileName.Size = New System.Drawing.Size(92, 13)
+        Me.lblOutputFileName.TabIndex = 3
+        Me.lblOutputFileName.Text = "Output File Name:"
         '
-        'gbMemory
+        'lblOutputFilePath
         '
-        Me.gbMemory.Controls.Add(Me.lblMatrixBuildStatus)
-        Me.gbMemory.Controls.Add(Me.pbMatrixBuildProgress)
-        Me.gbMemory.Controls.Add(Me.lblMemoryAllocated)
-        Me.gbMemory.Controls.Add(Me.btnForceGC)
-        Me.gbMemory.Location = New System.Drawing.Point(6, 71)
-        Me.gbMemory.Name = "gbMemory"
-        Me.gbMemory.Size = New System.Drawing.Size(355, 199)
-        Me.gbMemory.TabIndex = 8
-        Me.gbMemory.TabStop = False
-        Me.gbMemory.Text = "Memory"
+        Me.lblOutputFilePath.AutoSize = True
+        Me.lblOutputFilePath.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lblOutputFilePath.Location = New System.Drawing.Point(8, 22)
+        Me.lblOutputFilePath.Name = "lblOutputFilePath"
+        Me.lblOutputFilePath.Size = New System.Drawing.Size(86, 13)
+        Me.lblOutputFilePath.TabIndex = 2
+        Me.lblOutputFilePath.Text = "Output File Path:"
         '
-        'lblMatrixBuildStatus
+        'txtOutputFileName
         '
-        Me.lblMatrixBuildStatus.AutoSize = True
-        Me.lblMatrixBuildStatus.Location = New System.Drawing.Point(6, 155)
-        Me.lblMatrixBuildStatus.Name = "lblMatrixBuildStatus"
-        Me.lblMatrixBuildStatus.Size = New System.Drawing.Size(74, 13)
-        Me.lblMatrixBuildStatus.TabIndex = 9
-        Me.lblMatrixBuildStatus.Text = "Status: Ready"
+        Me.txtOutputFileName.Location = New System.Drawing.Point(129, 45)
+        Me.txtOutputFileName.Name = "txtOutputFileName"
+        Me.txtOutputFileName.Size = New System.Drawing.Size(220, 20)
+        Me.txtOutputFileName.TabIndex = 1
+        Me.txtOutputFileName.Text = "output"
+        Me.tooltipMain.SetToolTip(Me.txtOutputFileName, "You do not have to add an extension to this file. The" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "program will automatically" &
+        " append a .matrix extension" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to indicate that this file adheres to the defacto s" &
+        "tandard" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "we have created.")
         '
-        'pbMatrixBuildProgress
+        'txtOutputFileDirectory
         '
-        Me.pbMatrixBuildProgress.Location = New System.Drawing.Point(3, 171)
-        Me.pbMatrixBuildProgress.Name = "pbMatrixBuildProgress"
-        Me.pbMatrixBuildProgress.Size = New System.Drawing.Size(346, 23)
-        Me.pbMatrixBuildProgress.TabIndex = 8
-        '
-        'btnZeroMatrix
-        '
-        Me.btnZeroMatrix.ForeColor = System.Drawing.Color.Red
-        Me.btnZeroMatrix.Location = New System.Drawing.Point(248, 17)
-        Me.btnZeroMatrix.Name = "btnZeroMatrix"
-        Me.btnZeroMatrix.Size = New System.Drawing.Size(107, 22)
-        Me.btnZeroMatrix.TabIndex = 9
-        Me.btnZeroMatrix.Text = "Zero Matrix"
-        Me.btnZeroMatrix.UseVisualStyleBackColor = True
-        '
-        'btnIDMatrix
-        '
-        Me.btnIDMatrix.ForeColor = System.Drawing.Color.Red
-        Me.btnIDMatrix.Location = New System.Drawing.Point(248, 41)
-        Me.btnIDMatrix.Name = "btnIDMatrix"
-        Me.btnIDMatrix.Size = New System.Drawing.Size(107, 22)
-        Me.btnIDMatrix.TabIndex = 10
-        Me.btnIDMatrix.Text = "ID Matrix"
-        Me.btnIDMatrix.UseVisualStyleBackColor = True
+        Me.txtOutputFileDirectory.Location = New System.Drawing.Point(129, 19)
+        Me.txtOutputFileDirectory.Name = "txtOutputFileDirectory"
+        Me.txtOutputFileDirectory.Size = New System.Drawing.Size(220, 20)
+        Me.txtOutputFileDirectory.TabIndex = 0
+        Me.txtOutputFileDirectory.Text = "Desktop"
         '
         'lblOutputFileStatus
         '
@@ -329,82 +448,19 @@ Partial Class frmMain
         Me.lblOutputFileStatus.TabIndex = 0
         Me.lblOutputFileStatus.Text = "Status: [No Output File Created Yet]"
         '
-        'gbOutputFileSettings
+        'btnExit
         '
-        Me.gbOutputFileSettings.Controls.Add(Me.btnSaveToFile)
-        Me.gbOutputFileSettings.Controls.Add(Me.btnCreateFile)
-        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFileName)
-        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFilePath)
-        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileName)
-        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileDirectory)
-        Me.gbOutputFileSettings.Location = New System.Drawing.Point(6, 32)
-        Me.gbOutputFileSettings.Name = "gbOutputFileSettings"
-        Me.gbOutputFileSettings.Size = New System.Drawing.Size(355, 141)
-        Me.gbOutputFileSettings.TabIndex = 1
-        Me.gbOutputFileSettings.TabStop = False
-        Me.gbOutputFileSettings.Text = "Output File Settings"
-        '
-        'txtOutputFileDirectory
-        '
-        Me.txtOutputFileDirectory.Location = New System.Drawing.Point(129, 19)
-        Me.txtOutputFileDirectory.Name = "txtOutputFileDirectory"
-        Me.txtOutputFileDirectory.Size = New System.Drawing.Size(220, 20)
-        Me.txtOutputFileDirectory.TabIndex = 0
-        '
-        'txtOutputFileName
-        '
-        Me.txtOutputFileName.Location = New System.Drawing.Point(129, 45)
-        Me.txtOutputFileName.Name = "txtOutputFileName"
-        Me.txtOutputFileName.Size = New System.Drawing.Size(220, 20)
-        Me.txtOutputFileName.TabIndex = 1
-        Me.tooltipMain.SetToolTip(Me.txtOutputFileName, "You do not have to add an extension to this file. The" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "program will automatically" &
-        " append a .matrix extension" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to indicate that this file adheres to the defacto s" &
-        "tandard" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "we have created.")
+        Me.btnExit.Location = New System.Drawing.Point(12, 638)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(367, 23)
+        Me.btnExit.TabIndex = 4
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
         '
         'tooltipMain
         '
         Me.tooltipMain.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.tooltipMain.ToolTipTitle = "Information"
-        '
-        'lblOutputFilePath
-        '
-        Me.lblOutputFilePath.AutoSize = True
-        Me.lblOutputFilePath.ForeColor = System.Drawing.Color.Red
-        Me.lblOutputFilePath.Location = New System.Drawing.Point(8, 22)
-        Me.lblOutputFilePath.Name = "lblOutputFilePath"
-        Me.lblOutputFilePath.Size = New System.Drawing.Size(86, 13)
-        Me.lblOutputFilePath.TabIndex = 2
-        Me.lblOutputFilePath.Text = "Output File Path:"
-        '
-        'lblOutputFileName
-        '
-        Me.lblOutputFileName.AutoSize = True
-        Me.lblOutputFileName.ForeColor = System.Drawing.Color.Red
-        Me.lblOutputFileName.Location = New System.Drawing.Point(8, 48)
-        Me.lblOutputFileName.Name = "lblOutputFileName"
-        Me.lblOutputFileName.Size = New System.Drawing.Size(92, 13)
-        Me.lblOutputFileName.TabIndex = 3
-        Me.lblOutputFileName.Text = "Output File Name:"
-        '
-        'btnCreateFile
-        '
-        Me.btnCreateFile.ForeColor = System.Drawing.Color.Red
-        Me.btnCreateFile.Location = New System.Drawing.Point(129, 71)
-        Me.btnCreateFile.Name = "btnCreateFile"
-        Me.btnCreateFile.Size = New System.Drawing.Size(220, 23)
-        Me.btnCreateFile.TabIndex = 4
-        Me.btnCreateFile.Text = "Create File"
-        Me.btnCreateFile.UseVisualStyleBackColor = True
-        '
-        'btnSaveToFile
-        '
-        Me.btnSaveToFile.ForeColor = System.Drawing.Color.Red
-        Me.btnSaveToFile.Location = New System.Drawing.Point(129, 100)
-        Me.btnSaveToFile.Name = "btnSaveToFile"
-        Me.btnSaveToFile.Size = New System.Drawing.Size(220, 23)
-        Me.btnSaveToFile.TabIndex = 5
-        Me.btnSaveToFile.Text = "Save To File"
-        Me.btnSaveToFile.UseVisualStyleBackColor = True
         '
         'frmMain
         '
@@ -421,14 +477,15 @@ Partial Class frmMain
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gbMatrixSettings.ResumeLayout(False)
         Me.gbMatrixSettings.PerformLayout()
+        Me.gbMemory.ResumeLayout(False)
+        Me.gbMemory.PerformLayout()
         CType(Me.numCols, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.contextmenuNumInputs.ResumeLayout(False)
         CType(Me.numRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbMatrixViewer.ResumeLayout(False)
         Me.gbMatrixViewer.PerformLayout()
         Me.gbMatrixCalculations.ResumeLayout(False)
         Me.gbMatrixCalculations.PerformLayout()
-        Me.gbMemory.ResumeLayout(False)
-        Me.gbMemory.PerformLayout()
         Me.gbOutputFileSettings.ResumeLayout(False)
         Me.gbOutputFileSettings.PerformLayout()
         Me.ResumeLayout(False)
@@ -467,6 +524,13 @@ Partial Class frmMain
     Friend WithEvents txtOutputFileDirectory As TextBox
     Friend WithEvents lblOutputFileStatus As Label
     Friend WithEvents tooltipMain As ToolTip
-    Friend WithEvents btnSaveToFile As Button
-    Friend WithEvents btnCreateFile As Button
+    Friend WithEvents contextmenuNumInputs As ContextMenuStrip
+    Friend WithEvents SetMaxToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetMinToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetToConstToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents btnSave As Button
 End Class
