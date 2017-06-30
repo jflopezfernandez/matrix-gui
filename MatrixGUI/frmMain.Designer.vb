@@ -22,6 +22,8 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.gbMatrixSettings = New System.Windows.Forms.GroupBox()
         Me.btnUpdateView = New System.Windows.Forms.Button()
         Me.numCols = New System.Windows.Forms.NumericUpDown()
@@ -47,17 +49,26 @@ Partial Class frmMain
         Me.pbMatrixBuildProgress = New System.Windows.Forms.ProgressBar()
         Me.btnZeroMatrix = New System.Windows.Forms.Button()
         Me.btnIDMatrix = New System.Windows.Forms.Button()
+        Me.lblOutputFileStatus = New System.Windows.Forms.Label()
+        Me.gbOutputFileSettings = New System.Windows.Forms.GroupBox()
+        Me.txtOutputFileDirectory = New System.Windows.Forms.TextBox()
+        Me.txtOutputFileName = New System.Windows.Forms.TextBox()
+        Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblOutputFilePath = New System.Windows.Forms.Label()
+        Me.lblOutputFileName = New System.Windows.Forms.Label()
+        Me.btnCreateFile = New System.Windows.Forms.Button()
+        Me.btnSaveToFile = New System.Windows.Forms.Button()
         Me.gbMatrixSettings.SuspendLayout()
         CType(Me.numCols, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbMatrixViewer.SuspendLayout()
+        Me.gbMatrixCalculations.SuspendLayout()
         Me.gbMemory.SuspendLayout()
+        Me.gbOutputFileSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'gbMatrixSettings
         '
-        Me.gbMatrixSettings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbMatrixSettings.Controls.Add(Me.btnIDMatrix)
         Me.gbMatrixSettings.Controls.Add(Me.btnZeroMatrix)
         Me.gbMatrixSettings.Controls.Add(Me.gbMemory)
@@ -90,7 +101,8 @@ Partial Class frmMain
         Me.numCols.Name = "numCols"
         Me.numCols.Size = New System.Drawing.Size(70, 20)
         Me.numCols.TabIndex = 3
-        Me.numCols.Value = New Decimal(New Integer() {4, 0, 0, 0})
+        Me.tooltipMain.SetToolTip(Me.numCols, resources.GetString("numCols.ToolTip"))
+        Me.numCols.Value = New Decimal(New Integer() {3, 0, 0, 0})
         '
         'numRows
         '
@@ -100,7 +112,8 @@ Partial Class frmMain
         Me.numRows.Name = "numRows"
         Me.numRows.Size = New System.Drawing.Size(70, 20)
         Me.numRows.TabIndex = 2
-        Me.numRows.Value = New Decimal(New Integer() {4, 0, 0, 0})
+        Me.tooltipMain.SetToolTip(Me.numRows, resources.GetString("numRows.ToolTip"))
+        Me.numRows.Value = New Decimal(New Integer() {3, 0, 0, 0})
         '
         'lblCols
         '
@@ -133,7 +146,7 @@ Partial Class frmMain
         Me.gbMatrixViewer.Controls.Add(Me.TextBox1)
         Me.gbMatrixViewer.Location = New System.Drawing.Point(385, 12)
         Me.gbMatrixViewer.Name = "gbMatrixViewer"
-        Me.gbMatrixViewer.Size = New System.Drawing.Size(548, 649)
+        Me.gbMatrixViewer.Size = New System.Drawing.Size(1507, 1017)
         Me.gbMatrixViewer.TabIndex = 2
         Me.gbMatrixViewer.TabStop = False
         Me.gbMatrixViewer.Text = "Matrix Viewer"
@@ -221,9 +234,11 @@ Partial Class frmMain
         '
         'gbMatrixCalculations
         '
+        Me.gbMatrixCalculations.Controls.Add(Me.gbOutputFileSettings)
+        Me.gbMatrixCalculations.Controls.Add(Me.lblOutputFileStatus)
         Me.gbMatrixCalculations.Location = New System.Drawing.Point(12, 294)
         Me.gbMatrixCalculations.Name = "gbMatrixCalculations"
-        Me.gbMatrixCalculations.Size = New System.Drawing.Size(367, 236)
+        Me.gbMatrixCalculations.Size = New System.Drawing.Size(367, 338)
         Me.gbMatrixCalculations.TabIndex = 3
         Me.gbMatrixCalculations.TabStop = False
         Me.gbMatrixCalculations.Text = "Operations"
@@ -287,6 +302,7 @@ Partial Class frmMain
         '
         'btnZeroMatrix
         '
+        Me.btnZeroMatrix.ForeColor = System.Drawing.Color.Red
         Me.btnZeroMatrix.Location = New System.Drawing.Point(248, 17)
         Me.btnZeroMatrix.Name = "btnZeroMatrix"
         Me.btnZeroMatrix.Size = New System.Drawing.Size(107, 22)
@@ -296,6 +312,7 @@ Partial Class frmMain
         '
         'btnIDMatrix
         '
+        Me.btnIDMatrix.ForeColor = System.Drawing.Color.Red
         Me.btnIDMatrix.Location = New System.Drawing.Point(248, 41)
         Me.btnIDMatrix.Name = "btnIDMatrix"
         Me.btnIDMatrix.Size = New System.Drawing.Size(107, 22)
@@ -303,25 +320,117 @@ Partial Class frmMain
         Me.btnIDMatrix.Text = "ID Matrix"
         Me.btnIDMatrix.UseVisualStyleBackColor = True
         '
+        'lblOutputFileStatus
+        '
+        Me.lblOutputFileStatus.AutoSize = True
+        Me.lblOutputFileStatus.Location = New System.Drawing.Point(6, 16)
+        Me.lblOutputFileStatus.Name = "lblOutputFileStatus"
+        Me.lblOutputFileStatus.Size = New System.Drawing.Size(176, 13)
+        Me.lblOutputFileStatus.TabIndex = 0
+        Me.lblOutputFileStatus.Text = "Status: [No Output File Created Yet]"
+        '
+        'gbOutputFileSettings
+        '
+        Me.gbOutputFileSettings.Controls.Add(Me.btnSaveToFile)
+        Me.gbOutputFileSettings.Controls.Add(Me.btnCreateFile)
+        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFileName)
+        Me.gbOutputFileSettings.Controls.Add(Me.lblOutputFilePath)
+        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileName)
+        Me.gbOutputFileSettings.Controls.Add(Me.txtOutputFileDirectory)
+        Me.gbOutputFileSettings.Location = New System.Drawing.Point(6, 32)
+        Me.gbOutputFileSettings.Name = "gbOutputFileSettings"
+        Me.gbOutputFileSettings.Size = New System.Drawing.Size(355, 141)
+        Me.gbOutputFileSettings.TabIndex = 1
+        Me.gbOutputFileSettings.TabStop = False
+        Me.gbOutputFileSettings.Text = "Output File Settings"
+        '
+        'txtOutputFileDirectory
+        '
+        Me.txtOutputFileDirectory.Location = New System.Drawing.Point(129, 19)
+        Me.txtOutputFileDirectory.Name = "txtOutputFileDirectory"
+        Me.txtOutputFileDirectory.Size = New System.Drawing.Size(220, 20)
+        Me.txtOutputFileDirectory.TabIndex = 0
+        '
+        'txtOutputFileName
+        '
+        Me.txtOutputFileName.Location = New System.Drawing.Point(129, 45)
+        Me.txtOutputFileName.Name = "txtOutputFileName"
+        Me.txtOutputFileName.Size = New System.Drawing.Size(220, 20)
+        Me.txtOutputFileName.TabIndex = 1
+        Me.tooltipMain.SetToolTip(Me.txtOutputFileName, "You do not have to add an extension to this file. The" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "program will automatically" &
+        " append a .matrix extension" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to indicate that this file adheres to the defacto s" &
+        "tandard" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "we have created.")
+        '
+        'tooltipMain
+        '
+        Me.tooltipMain.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.tooltipMain.ToolTipTitle = "Information"
+        '
+        'lblOutputFilePath
+        '
+        Me.lblOutputFilePath.AutoSize = True
+        Me.lblOutputFilePath.ForeColor = System.Drawing.Color.Red
+        Me.lblOutputFilePath.Location = New System.Drawing.Point(8, 22)
+        Me.lblOutputFilePath.Name = "lblOutputFilePath"
+        Me.lblOutputFilePath.Size = New System.Drawing.Size(86, 13)
+        Me.lblOutputFilePath.TabIndex = 2
+        Me.lblOutputFilePath.Text = "Output File Path:"
+        '
+        'lblOutputFileName
+        '
+        Me.lblOutputFileName.AutoSize = True
+        Me.lblOutputFileName.ForeColor = System.Drawing.Color.Red
+        Me.lblOutputFileName.Location = New System.Drawing.Point(8, 48)
+        Me.lblOutputFileName.Name = "lblOutputFileName"
+        Me.lblOutputFileName.Size = New System.Drawing.Size(92, 13)
+        Me.lblOutputFileName.TabIndex = 3
+        Me.lblOutputFileName.Text = "Output File Name:"
+        '
+        'btnCreateFile
+        '
+        Me.btnCreateFile.ForeColor = System.Drawing.Color.Red
+        Me.btnCreateFile.Location = New System.Drawing.Point(129, 71)
+        Me.btnCreateFile.Name = "btnCreateFile"
+        Me.btnCreateFile.Size = New System.Drawing.Size(220, 23)
+        Me.btnCreateFile.TabIndex = 4
+        Me.btnCreateFile.Text = "Create File"
+        Me.btnCreateFile.UseVisualStyleBackColor = True
+        '
+        'btnSaveToFile
+        '
+        Me.btnSaveToFile.ForeColor = System.Drawing.Color.Red
+        Me.btnSaveToFile.Location = New System.Drawing.Point(129, 100)
+        Me.btnSaveToFile.Name = "btnSaveToFile"
+        Me.btnSaveToFile.Size = New System.Drawing.Size(220, 23)
+        Me.btnSaveToFile.TabIndex = 5
+        Me.btnSaveToFile.Text = "Save To File"
+        Me.btnSaveToFile.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(945, 673)
+        Me.ClientSize = New System.Drawing.Size(1904, 1041)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.gbMatrixCalculations)
         Me.Controls.Add(Me.gbMatrixViewer)
         Me.Controls.Add(Me.gbMatrixSettings)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmMain"
         Me.Text = "Matrix Builder"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gbMatrixSettings.ResumeLayout(False)
         Me.gbMatrixSettings.PerformLayout()
         CType(Me.numCols, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbMatrixViewer.ResumeLayout(False)
         Me.gbMatrixViewer.PerformLayout()
+        Me.gbMatrixCalculations.ResumeLayout(False)
+        Me.gbMatrixCalculations.PerformLayout()
         Me.gbMemory.ResumeLayout(False)
         Me.gbMemory.PerformLayout()
+        Me.gbOutputFileSettings.ResumeLayout(False)
+        Me.gbOutputFileSettings.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -351,4 +460,13 @@ Partial Class frmMain
     Friend WithEvents lblMatrixBuildStatus As Label
     Friend WithEvents pbMatrixBuildProgress As ProgressBar
     Friend WithEvents btnForceGC As Button
+    Friend WithEvents gbOutputFileSettings As GroupBox
+    Friend WithEvents lblOutputFileName As Label
+    Friend WithEvents lblOutputFilePath As Label
+    Friend WithEvents txtOutputFileName As TextBox
+    Friend WithEvents txtOutputFileDirectory As TextBox
+    Friend WithEvents lblOutputFileStatus As Label
+    Friend WithEvents tooltipMain As ToolTip
+    Friend WithEvents btnSaveToFile As Button
+    Friend WithEvents btnCreateFile As Button
 End Class
