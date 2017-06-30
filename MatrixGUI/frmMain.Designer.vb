@@ -37,11 +37,6 @@ Partial Class frmMain
         Me.contextmenuNumInputs = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SetMaxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetMinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SetToConstToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.numRows = New System.Windows.Forms.NumericUpDown()
         Me.lblCols = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
@@ -65,6 +60,12 @@ Partial Class frmMain
         Me.lblOutputFileStatus = New System.Windows.Forms.Label()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
+        Me.SetTo5ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetTo10ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetTo25ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetTo50ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetTo500ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetTo1000ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbMatrixSettings.SuspendLayout()
         Me.gbMemory.SuspendLayout()
         CType(Me.numCols, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,7 +105,7 @@ Partial Class frmMain
         '
         'btnZeroMatrix
         '
-        Me.btnZeroMatrix.ForeColor = System.Drawing.Color.Red
+        Me.btnZeroMatrix.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnZeroMatrix.Location = New System.Drawing.Point(248, 17)
         Me.btnZeroMatrix.Name = "btnZeroMatrix"
         Me.btnZeroMatrix.Size = New System.Drawing.Size(107, 22)
@@ -187,54 +188,21 @@ Partial Class frmMain
         '
         'contextmenuNumInputs
         '
-        Me.contextmenuNumInputs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetMaxToolStripMenuItem, Me.SetMinToolStripMenuItem, Me.SetToConstToolStripMenuItem})
+        Me.contextmenuNumInputs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetMaxToolStripMenuItem, Me.SetMinToolStripMenuItem, Me.SetTo5ToolStripMenuItem, Me.SetTo10ToolStripMenuItem, Me.SetTo25ToolStripMenuItem, Me.SetTo50ToolStripMenuItem, Me.SetTo500ToolStripMenuItem, Me.SetTo1000ToolStripMenuItem})
         Me.contextmenuNumInputs.Name = "contextmenuNumInputs"
-        Me.contextmenuNumInputs.Size = New System.Drawing.Size(141, 70)
+        Me.contextmenuNumInputs.Size = New System.Drawing.Size(134, 180)
         '
         'SetMaxToolStripMenuItem
         '
         Me.SetMaxToolStripMenuItem.Name = "SetMaxToolStripMenuItem"
-        Me.SetMaxToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SetMaxToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.SetMaxToolStripMenuItem.Text = "Set To Max"
         '
         'SetMinToolStripMenuItem
         '
         Me.SetMinToolStripMenuItem.Name = "SetMinToolStripMenuItem"
-        Me.SetMinToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SetMinToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.SetMinToolStripMenuItem.Text = "Set To Min"
-        '
-        'SetToConstToolStripMenuItem
-        '
-        Me.SetToConstToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
-        Me.SetToConstToolStripMenuItem.Enabled = False
-        Me.SetToConstToolStripMenuItem.ForeColor = System.Drawing.Color.Red
-        Me.SetToConstToolStripMenuItem.Name = "SetToConstToolStripMenuItem"
-        Me.SetToConstToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
-        Me.SetToConstToolStripMenuItem.Text = "Set To Const"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(86, 22)
-        Me.ToolStripMenuItem2.Text = "3"
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(86, 22)
-        Me.ToolStripMenuItem3.Text = "4"
-        '
-        'ToolStripMenuItem4
-        '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(86, 22)
-        Me.ToolStripMenuItem4.Text = "5"
-        '
-        'ToolStripMenuItem5
-        '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(86, 22)
-        Me.ToolStripMenuItem5.Text = "10"
         '
         'numRows
         '
@@ -462,6 +430,42 @@ Partial Class frmMain
         Me.tooltipMain.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.tooltipMain.ToolTipTitle = "Information"
         '
+        'SetTo5ToolStripMenuItem
+        '
+        Me.SetTo5ToolStripMenuItem.Name = "SetTo5ToolStripMenuItem"
+        Me.SetTo5ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo5ToolStripMenuItem.Text = "Set To 5"
+        '
+        'SetTo10ToolStripMenuItem
+        '
+        Me.SetTo10ToolStripMenuItem.Name = "SetTo10ToolStripMenuItem"
+        Me.SetTo10ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo10ToolStripMenuItem.Text = "Set To 10"
+        '
+        'SetTo25ToolStripMenuItem
+        '
+        Me.SetTo25ToolStripMenuItem.Name = "SetTo25ToolStripMenuItem"
+        Me.SetTo25ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo25ToolStripMenuItem.Text = "Set To 25"
+        '
+        'SetTo50ToolStripMenuItem
+        '
+        Me.SetTo50ToolStripMenuItem.Name = "SetTo50ToolStripMenuItem"
+        Me.SetTo50ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo50ToolStripMenuItem.Text = "Set To 50"
+        '
+        'SetTo500ToolStripMenuItem
+        '
+        Me.SetTo500ToolStripMenuItem.Name = "SetTo500ToolStripMenuItem"
+        Me.SetTo500ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo500ToolStripMenuItem.Text = "Set To 500"
+        '
+        'SetTo1000ToolStripMenuItem
+        '
+        Me.SetTo1000ToolStripMenuItem.Name = "SetTo1000ToolStripMenuItem"
+        Me.SetTo1000ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SetTo1000ToolStripMenuItem.Text = "Set To 1000"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -527,10 +531,11 @@ Partial Class frmMain
     Friend WithEvents contextmenuNumInputs As ContextMenuStrip
     Friend WithEvents SetMaxToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetMinToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SetToConstToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
     Friend WithEvents btnSave As Button
+    Friend WithEvents SetTo5ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTo10ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTo25ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTo50ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTo500ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTo1000ToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -82,7 +82,42 @@ Public Class frmMain
         If currentMatrixWidth <> currentMatrixHeight Then
             MsgBox("Cannot create an identity matrix from a non-square matrix.", vbOKOnly, "Error - Matrix Dimensions Incompatible With Operation")
         Else
-            MsgBox("[PRETEND THE MATRIX IS BEING MADE TO BE AN IDENTITY MATRIX]")
+            Dim iteratorControl As Control
+
+            Dim intIterator1 As Integer = 0 'i
+            Dim intIterator2 As Integer = 0 'j
+            Dim totalItems As Integer = 0
+
+            MsgBox("Controls in group box: " & (gbMatrixViewer.Controls.Count))
+            For Each iteratorControl In gbMatrixViewer.Controls
+
+                ' Move the iterators up first
+                If intIterator2 = currentMatrixWidth Then
+                    If intIterator1 = currentMatrixHeight Then
+                        MsgBox("Finished iterating through the matrix.")
+                        MsgBox("Max Height: " & intIterator1)
+                        MsgBox("Max Width: " & intIterator2)
+
+                        Exit For
+                    Else
+                        intIterator1 = intIterator1 + 1
+                        intIterator2 = 0
+
+                    End If
+                Else
+                    intIterator2 = intIterator2 + 1
+
+                End If
+
+                ' Text-Set Logic
+                If (intIterator1 + 1) = (intIterator2 + 1) Then
+                    iteratorControl.Text = 1
+                Else
+                    iteratorControl.Text = 0
+                End If
+
+                totalItems = totalItems + 1
+            Next
         End If
 
     End Sub
@@ -93,7 +128,10 @@ Public Class frmMain
         If responseConfirmZeroMatrix = vbNo Then
             ' Nothing
         Else
-            MsgBox("[PRETEND MATRIX IS BEING ZEROED OUT RIGHT NOW]")
+            Dim iteratorControl As Control
+            For Each iteratorControl In gbMatrixViewer.Controls
+                iteratorControl.Text = "0"
+            Next
         End If
     End Sub
 
@@ -142,7 +180,7 @@ Public Class frmMain
         End With
 
         If newSaveFileDialog.ShowDialog() = DialogResult.OK Then
-            writeMatrixToFile(newSaveFileDialog)
+            writeMatrixToOutputFile(newSaveFileDialog)
         End If
 
     End Sub
@@ -171,78 +209,6 @@ Public Class frmMain
         currentControl.Value = minDimension
 
     End Sub
-
-    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        Dim localConst As Decimal = 3
-
-
-        Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
-        Dim cms As ContextMenuStrip = CType(tsmi.Owner, ContextMenuStrip)
-
-        Dim currentControl As NumericUpDown = DirectCast(cms.SourceControl, NumericUpDown)
-        currentControl.Value = localConst
-
-    End Sub
-
-    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
-        Dim localConst As Decimal = 4
-
-        Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
-        Dim cms As ContextMenuStrip = CType(tsmi.Owner, ContextMenuStrip)
-
-        Dim currentControl As NumericUpDown = DirectCast(cms.SourceControl, NumericUpDown)
-        currentControl.Value = localConst
-
-    End Sub
-
-    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
-        Dim localConst As Decimal = 5
-
-        Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
-        Dim cms As ContextMenuStrip = CType(tsmi.Owner, ContextMenuStrip)
-
-        Dim currentControl As NumericUpDown = DirectCast(cms.SourceControl, NumericUpDown)
-        currentControl.Value = localConst
-
-    End Sub
-
-    ' TODO:     Fix this menu item
-    ' NOTES:    Abstraction/indirection I couldn't figure out
-    '           30-June-2017 (4:25AM) JFLF
-
-    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
-        Dim localConst As Decimal = 10
-
-        ' ATTEMPT 1
-        'Dim tsmi As ToolStripDropDown = CType(sender, ToolStripDropDown)
-        'Dim tsmp As ToolStripMenuItem = CType(tsmi.OwnerItem, ToolStripMenuItem)
-        'Dim cms As ContextMenuStrip = CType(tsmp.Owner, ContextMenuStrip)
-
-        'Dim currentControl As NumericUpDown = DirectCast(cms.SourceControl, NumericUpDown)
-        'currentControl.Value = localConst
-
-        'MsgBox(ToolStripMenuItem5.OwnerItem.Owner.Name)
-
-        ' ATTEMPT 2
-        'Dim ts1 As ToolStripDropDown = CType(sender, ToolStripDropDown)
-        'Dim ts2 As ToolStripDropDownButton = CType(ts1., ToolStripDropDownButton)
-        'Dim ts3 As ToolStripMenuItem = CType()
-        'Dim cms As ContextMenuStrip = CType(ToolStripMenuItem5.OwnerItem.Owner, ContextMenuStrip)
-
-        'Dim currentControl As NumericUpDown = DirectCast(cms.SourceControl, NumericUpDown)
-        'currentControl.Value = localConst
-
-        'MsgBox(ToolStripMenuItem5.OwnerItem.Owner.Name)
-        ''MsgBox(ToolStripMenuItem5.OwnerItem.Owner.Parent.Name)
-
-        'Dim tsmi As ToolStripDropDownButton = CType(sender, ToolStripDropDownButton)
-        'Dim tsdm As ToolStripDropDownMenu = CType(tsmi.Owner, ToolStripDropDownMenu)
-        'Dim csm As ContextMenuStrip = DirectCast(tsdm.Parent, ContextMenuStrip)
-
-        'Dim currentControl As NumericUpDown = DirectCast(csm.Parent, NumericUpDown)
-        'currentControl.Value = localConst
-    End Sub
-
 
 
 #End Region
@@ -316,8 +282,9 @@ Public Class frmMain
                     .Name = "mc" & i & j
 
                     ' Just for debug to see which cells go where
-                    'Text = i & "," & j
-                    .Text = "(" & i & "," & j & ")"
+                    '.Text = i + 1 & "," & j + 1
+                    .Text = i & j
+                    '.Text = newMatrixCell.Name
 
                     '.Text = ""
 
@@ -355,102 +322,75 @@ Public Class frmMain
 
 #Region "FILE_IO_FUNCTIONS"
 
-    Private Sub writeMatrixToFile(ByRef saveFileDialog As SaveFileDialog)
-        Dim saveFileStream As FileStream = New FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+    ' Starting the function over
+    Private Sub writeMatrixToOutputFile(ByRef saveFileDialog As SaveFileDialog)
 
-        If saveFileStream IsNot Nothing Then
-            ' Logic to output the Matrix to File
-            Dim streamwriter As StreamWriter = New StreamWriter(saveFileStream)
+        UseWaitCursor = True
 
-            ' Set up the label and progress bar
-            Dim counterCellsWritten As Integer = 0
+        Dim outputStreamWriter As New StreamWriter(saveFileDialog.FileName)
 
-            lblMatrixBuildStatus.Text = "Status: Writing matrix to file..."
+        ' Prep progress bar and label
+        lblMatrixBuildStatus.Text = "Status: Writing matrix to file..."
+        pbMatrixBuildProgress.Maximum = currentMatrixHeight * currentMatrixWidth
+        pbMatrixBuildProgress.Value = 0
 
+        Dim outputStringDimensions As String = "Matrix Dimensions: " & currentMatrixHeight & " x " & currentMatrixWidth
+        outputStreamWriter.WriteLine(outputStringDimensions)
+        outputStreamWriter.Flush()
 
-            With pbMatrixBuildProgress
-                .Value = 0
-                .Maximum = currentMatrixWidth * currentMatrixWidth
-            End With
+        Dim count As Integer = 0
 
-            ' Write the file line by line
-            Dim descriptionString As String = "Matrix Dimensions: " & currentMatrixHeight & " x " & currentMatrixWidth & vbCr & vbCr
-            streamwriter.WriteLine(descriptionString)
-            streamwriter.Flush()
+        Dim iterator1 As Integer = 0
+        Dim iterator2 As Integer = 0
 
-            Dim lineOutputString As String = ""
+        Dim iteratorControl As Control
 
-            ' TODO: Refactor this. I have once again stooped extremely low
-            ' 30-June-2017 (5:33AM) JFLF
-            Dim total_cells_found As Integer = 0
+        Dim outputStringLine As String = ""
+        For Each iteratorControl In gbMatrixViewer.Controls
+            If iterator2 = currentMatrixWidth - 1 Then
+                ' End of the row
 
-            For i = 0 To currentMatrixHeight - 1
-                ' Reset the output string before every line
-                'lineOutputString = ""
-i_loop:
-                For j = 0 To currentMatrixWidth - 1
-                    Dim currentCellName As String = "mc" & i & j
+                If iterator1 = currentMatrixHeight Then
+                    ' Finished
+                Else
+                    iterator2 = 0
+                    iterator1 = iterator1 + 1
 
-                    ' TODO: Refactor this. I can't believe I stooped this low. I am ashamed
-                    '       30-June-2017 (5:28AM) JFLF
-                    Dim cells_found_on_this_line As Integer = 0
-j_loop:
-                    ' Find the current cell by looking it up by name, iterating through each textbox in the container
-                    Dim iteratorCell As Control
-                    For Each iteratorCell In gbMatrixViewer.Controls
+                    outputStringLine = String.Concat(outputStringLine, iteratorControl.Text, " ")
+                    count = count + 1
 
-                        ' Correct cell has been found
-                        If iteratorCell.Name = currentCellName Then
-                            total_cells_found = total_cells_found + 1
+                End If
 
+                outputStreamWriter.WriteLine(outputStringLine)
+                outputStreamWriter.Flush()
 
-                            lineOutputString = String.Concat(lineOutputString, iteratorCell.Text, " ")
+                outputStringLine = ""
+            Else
+                iterator2 = iterator2 + 1
 
-                            ' Update the progress bar
-                            If pbMatrixBuildProgress.Value = pbMatrixBuildProgress.Maximum Then
-                                ' Do nothing - finished
-                                GoTo finished
-                            Else
-                                pbMatrixBuildProgress.Value = pbMatrixBuildProgress.Value + 1
-                                cells_found_on_this_line = cells_found_on_this_line + 1
+                outputStringLine = String.Concat(outputStringLine, iteratorControl.Text, " ")
+                count = count + 1
+            End If
 
-                                If cells_found_on_this_line = currentMatrixWidth - 1 Then
-                                    GoTo i_loop
-                                Else
-                                    GoTo j_loop
-                                End If
-                            End If
+            pbMatrixBuildProgress.Value = pbMatrixBuildProgress.Value + 1
+        Next ' Control Container Iteration Loop
 
-                        End If
-
-                        streamwriter.WriteLine(lineOutputString)
-                        streamwriter.Flush()
-                    Next
-
-                    streamwriter.WriteLine(vbCr)
-                    streamwriter.Flush()
-
-                Next
-
-                MsgBox("Finished j-iteration" & vbCr & "i-iteration: " & i + 1)
-            Next
-finished:
-            MsgBox("cells found: " & total_cells_found)
+        outputStreamWriter.WriteLine(outputStringLine)
+        outputStreamWriter.Flush()
+        outputStreamWriter.Close()
 
 
-            streamwriter.Close()
-            saveFileStream.Close()
 
-            ' Finished, reset label and progress bar
-            lblMatrixBuildStatus.Text = "Status: Ready"
-            pbMatrixBuildProgress.Value = 0
-            pbMatrixBuildProgress.Maximum = 100
+        ' Finished, reset label and progress bar
+        lblMatrixBuildStatus.Text = "Status: Ready"
+        pbMatrixBuildProgress.Value = 0
+        pbMatrixBuildProgress.Maximum = 100
 
-            ' Let the user know the operation is complete
-            MsgBox("Write Operation Successfully Completed.", vbOKOnly, "File Saved")
+        ' Let the user know the operation is complete
+        MsgBox("Write Operation Successfully Completed.", vbOKOnly, "File Saved")
+        MsgBox("Items written to file: " & count)
 
-        End If
-
+        UseWaitCursor = False
     End Sub
 
 #End Region
